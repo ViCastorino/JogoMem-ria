@@ -1,72 +1,60 @@
-function mostrar(event){
-    console.log('a')
-}
 
-
-  // CARO INTERPRETADOR RODA ESSE CÓDIGO PELOAMORDEDEUS
-
-  let cardList = document.querySelectorAll('.caixa')
+let cardList = document.querySelectorAll('.carta');
   let selecionados = [];
-  let i = 0
+  let i = 0;
+  let lista = 0;
+  let imgs = ["homiranha.png","menina.png","porquinho.png","tiazinha.png","menino.png","vilao.png"];
   
+  // function inserir(){   
+  // let min = 0;
+  // let  max = 12;
+  //   for(let j = 0; j <= max; j++){
+  //     let indice = Math.floor(Math.random(min, max) * (max - min + 1) + min);
+  //     cardList[j].style.backgroundImage = imgs[indice]; 
+  //   }
+  // }
   
-  function saoIguais(vetor){
-    console.log(vetor)
-  }
-  
-  //RETIRAR O FILTRO QUE ESCURECE A IMG
-  function mostrarCard(ev) {
-      ev.target.classList.toggle('showCard');
-  }
-  
-  //ARMAZENAR OS DOIS ELEMENTOS CLICADOS E VERIFICA-LOS
-  function selecionarCard(ev){
-  
-    selecionados[i] = ev.target.src
-    i+=1;
-    console.log(i , selecionados)
-  }
-  
-  //EVENTOS DE CLIQUE PARA A CLASSE .CARD
-  for (let card of cardList) {
-    card.onclick = function(){
-    mostrarCard(event);
-    selecionarCard(event);
-  
-    }
-  }
+function embaralhar( lista ){
+  let valor;
+  let indice;
 
-for(let quadrado of quadrados){
-    quadrado.onclick = function(event){
-        for(quadrado of quadrados){
-            event.target.quadrado.src = aleatorio()
-        }
-    };
+    for (let v = lista.length -1;v!==0;v --){
+      let indice = Math.floor(Math.random() * v);
+      valor = lista[v];
+      lista[v] = lista[indice];
+      lista[indice] = valor;
+    }
+    return lista;
 }
 
- //aleatorio();    
-//      let imgs = ["homiranha.png","menina.png","porquinho.png","tiazinha.png","menino.png","vilao.png"];
-//      function aleatorio(lista){
-//      let valor;
-//      let indice;   
-//      let min = 0;
-//      let  max = imgs.length -1;
-//      for(let i = lista.length - 1){
-//      indice = Math.floor(Math.random(min, max) * (max - min + 1) + min);
-//      valor = lista[i]; 
-//      lista[i] = lista[indice]; 
-//      lista[indice] = valor;
-//      }
-//      return lista;
-//   }
+let imagens = imgs . concat (imgs);
+imagens = embaralhar (imagens);
 
 
+function abrir(carta){
+  carta.backgroundImage = `url('Imagens/${imagens[Number(carta.id)]}')`;
+  carta.onclick = null;
+}
 
+function  travarCliques () {
+  for (let carta in cardList) {
+      carta.onclick  =  null;
+  }
+}
 
+function  destravarCliques () {
+  for (let carta in cardList) {
+      if ( ! cardList.classList.contains ( " correta " )) {
+        return (carta);
+      }
+  }
+}
 
-
-
-
-
-
-
+function  travarCliques () {
+  for (let carta in cardList) {
+      carta.onclick  =  null;
+  }
+}
+for (carta in cardList) {
+  abrir(carta);
+}
