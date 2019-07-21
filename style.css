@@ -1,61 +1,65 @@
+*{
+    margin: 0;
+    padding: 0;
+
+}
 body{
     margin: 0;
     padding: 0;
-    background-color: rgba( 0 , 0 , 0 , 0.87 );
-    display: flex;
-    align-items: center;
-    flex-direction: column;    
-}
-main{
-    height: 510px;
-    width: 70vw;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-auto-rows: minmax(auto, calc(15vw + 20px)); 
-    grid-row-gap: 5px;
-    grid-gap: 5px;
-    justify-items: center;
-    align-items: center;
-}
-
-header{
-    width: 100vw;
-    height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 10px white double;
+    flex-direction: column;
+}
+header{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+h1  {
+    color: black;
+    font-weight: bold;
 }
 
+#caixa{
+    width: 1000px;
+    height: 500px;
+    border: 1px solid;
+    position: relative;
+    margin: 10px auto;
+    border-radius: 10px;
+}
 
-h1{
-    color: white;
-  }
-.carta {
-    width: 15vw;
-    height: 15vw;
-    max-width: 110px;
-    max-height: 110px;
-    box-sizing: border-box;
-    background-size: contain;
-    background-position:center;
-    background-repeat: no-repeat;
-  }
-  .carta:not(.correta):hover {
-    cursor: pointer;
-    border: 5px dotted black;
-  }
+.card{
+    width: 160px;
+    height: 240px;
+    position: absolute;
+    border-radius: 10px;
+}
 
-/* .caixa:selected{
-    box-shadow:0 0 10px rgba(0, 0, 0, 0.5);
-      filter: brightness(20%);
-  }
+.face{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 10px;
+    transition: all 1s;
+    backface-visibility: hidden;
+} 
+ .back{
+    background:url("Imagens/pattern.png"); 
+ }
 
-.caixa:hover{
-    cursor: pointer;
-  }
+ .card:hover{
+     cursor: pointer;
+     box-shadow: 0 0 10px black;
+ }
 
-.showCard{
-    transition: 1s;
-    filter: brightness(100%);
-} */
+.back.turned{
+    transform: rotateY(180deg);
+}
+.front{
+    transform: rotateY(-180deg);
+}
+.front.turned{
+    transform: rotateY(0deg);
+} 

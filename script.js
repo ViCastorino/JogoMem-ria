@@ -1,60 +1,40 @@
 
-let cardList = document.querySelectorAll('.carta');
-  let selecionados = [];
-  let i = 0;
-  let lista = 0;
-  let imgs = ["homiranha.png","menina.png","porquinho.png","tiazinha.png","menino.png","vilao.png"];
+(function(){
+
+  //esse laço de repetição é o que puxa as imagens da pasta pelo src
+  //detalhe: tive que mudar o nome de cada imagem para um numero, para que pudesse
+  //chamar uma de cada vez por aqui
+
+  var imgs = [];
+    for (let i=0;1<13;i++){
+      var picture = {
+        src:"Imagens/" + i + ".png",
+        id: i%7
+      };
+      imgs.push(picture);
+    }   
   
-  // function inserir(){   
-  // let min = 0;
-  // let  max = 12;
-  //   for(let j = 0; j <= max; j++){
-  //     let indice = Math.floor(Math.random(min, max) * (max - min + 1) + min);
-  //     cardList[j].style.backgroundImage = imgs[indice]; 
-  //   }
-  // }
-  
-function embaralhar( lista ){
-  let valor;
-  let indice;
+    inicio();
 
-    for (let v = lista.length -1;v!==0;v --){
-      let indice = Math.floor(Math.random() * v);
-      valor = lista[v];
-      lista[v] = lista[indice];
-      lista[indice] = valor;
-    }
-    return lista;
-}
-
-let imagens = imgs . concat (imgs);
-imagens = embaralhar (imagens);
-
-
-function abrir(carta){
-  carta.backgroundImage = `url('Imagens/${imagens[Number(carta.id)]}')`;
-  carta.onclick = null;
-}
-
-function  travarCliques () {
-  for (let carta in cardList) {
-      carta.onclick  =  null;
-  }
-}
-
-function  destravarCliques () {
-  for (let carta in cardList) {
-      if ( ! cardList.classList.contains ( " correta " )) {
-        return (carta);
+  //criei essa função para distribuir as imagens na segunda div de cada classe, ou seja, na face da frente  
+  function inicio(){
+      var frontFaces = document.getElementsByClassName("front");
+        for(let i = 0;i<13;i++){
+        let card = document.querySelector("#card" + i);
+        card.style.left = i%6 == 0 ? 5 + "px": i % 6 * 165 + 5 + "px";
+        card.style.top = i<6 ? 5 + "px": 250 + "px";
+        card.addEventListener("click",viraVira,false);
+        frontFaces[i].style.background = "url('"+ imgs[i].src +"')";
       }
   }
-}
 
-function  travarCliques () {
-  for (let carta in cardList) {
-      carta.onclick  =  null;
+  //essa funcçao cria uma classe nova quando acontece um evento
+  // serve para fazer a carta virar, mas eu configurei essa nova classe no css
+  function viraVira(){
+    var faces = this.getElementsByClassName("face");
+     faces[0].classList.toggle("turned");
+     faces[1].classList.toggle("turned");
   }
-}
-for (carta in cardList) {
-  abrir(carta);
-}
+
+
+}());
